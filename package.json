@@ -1,12 +1,12 @@
 {
-  "name": "tasksnap-vscode",
-  "displayName": "TaskSnap-vscode",
-  "publisher": "regloff",
-  "description": "task switching support for software developers",
+  "name": "contextshifter-vscode",
+  "displayName": "ContextShifter",
+  "publisher": "contextshifter",
+  "description": "ContextShifter VS Code companion: task switching support for software developers",
   "icon": "assets/icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/HASEL-UZH/TaskSnap-vscode-extension"
+    "url": "https://github.com/StalyTV/ContextShifter-vscode-extension"
   },
   "version": "0.2.2",
   "engines": {
