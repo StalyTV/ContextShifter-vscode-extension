@@ -45,7 +45,21 @@ function onOpen() {
       "[ipc] tried to send data, but websocket not connected"
     );
   }
-  websocket.send(JSON.stringify({ data: {}, endpoint: "ws-connected" }));
+  // Announce this window's workspace on connect so the desktop app can tell
+  // which window belongs to which project (used to close irrelevant windows).
+  websocket.send(
+    JSON.stringify({
+      data: { workspacePath: getWorkspacePath() },
+      endpoint: "ws-connected",
+    })
+  );
+}
+
+function getWorkspacePath(): string | undefined {
+  return (
+    vscode.workspace.workspaceFile?.fsPath ??
+    vscode.workspace.workspaceFolders?.[0]?.uri.fsPath
+  );
 }
 
 async function onMessage(event: any) {
@@ -59,6 +73,10 @@ async function onMessage(event: any) {
   } else if (data.endpoint === "close-files") {
     const files = data.data as string[];
     handleCloseFiles(files);
+  } else if (data.endpoint === "close-window") {
+    // Close THIS VS Code window (the desktop app only sends this to windows
+    // whose project isn't part of the task being restored).
+    vscode.commands.executeCommand("workbench.action.closeWindow");
   }
 }
 
