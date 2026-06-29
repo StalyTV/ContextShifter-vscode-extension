@@ -25,7 +25,7 @@ let reconnectInterval: NodeJS.Timeout;
 let websocket: WebSocket;
 
 export function createWebsocketConnection() {
-  websocket = new WebSocket("ws://localhost:8086");
+  websocket = new WebSocket("ws://localhost:8475");
   websocket.addEventListener("error", () => {
     console.log("error");
   });
